@@ -1,57 +1,66 @@
-# on: [push]
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
 
-name: Build Docker Image And Submit Metadata To Reliza Hub
+name: Build Rebom images and Helm and submit metadata to ReARM
 
 permissions:
   contents: write
 
 jobs:
   build-backend:
+    permissions:
+      id-token: write
     name: Build And Push Backend
     runs-on: ubuntu-latest
     steps:
       - name: RelizaHub Build And Submit Release metadata action
-        uses: relizaio/reliza-docker-action@2.1
+        uses: relizaio/rearm-docker-action@61b98443b2d503fb460e4a7409ad1819a271db3d # v1.4.0
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
           registry_password: ${{ secrets.DOCKER_TOKEN }}
           registry_host: registry.relizahub.com
-          image_namespace: registry.relizahub.com/library
+          image_namespace: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public
           image_name: rebom-backend
-          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
-          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
+          rearm_api_id: ${{ secrets.REARM_BACKEND_API_ID }}
+          rearm_api_key: ${{ secrets.REARM_BACKEND_API_KEY }}
+          rearm_api_url: https://sector.rearmhq.com
           path: backend
-          reliza_project_id: 116bbe7f-35ea-4554-bbde-3845059961d5
           enable_sbom: 'true'
-  build-frontend:
-    name: Build And Push Frontend
-    runs-on: ubuntu-latest
-    steps:
-      - name: RelizaHub Build And Submit Release metadata action
-        uses: relizaio/reliza-docker-action@2.1
-        with:
-          registry_username: ${{ secrets.DOCKER_LOGIN }}
-          registry_password: ${{ secrets.DOCKER_TOKEN }}
-          registry_host: registry.relizahub.com
-          image_namespace: registry.relizahub.com/library
-          image_name: rebom-frontend
-          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
-          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
-          path: frontend
-          reliza_project_id: a77887b8-2095-46ce-851f-47c72eca863b
-          enable_sbom: 'true'
-  build-helm:
-    name: Build And Push Helm Chart
-    runs-on: ubuntu-latest
-    steps:
-      - name: RelizaHub Build And Submit Release metadata action
-        uses: relizaio/reliza-helm-action@2.0
-        with:
-          registry_username: ${{ secrets.DOCKER_LOGIN }}
-          registry_password: ${{ secrets.DOCKER_TOKEN }}
-          registry_host: registry.relizahub.com/library
-          helm_chart_name: rebom
-          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
-          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
-          path: helm
-          reliza_project_id: 4aa0e445-9f12-4c80-880a-f919c1761f6c
+          source_code_sbom_type: 'npm'
+          enable_public_cosign_sigstore: 'true'
+          enable_codeql: 'true'
+          codeql_language: 'javascript'
+#  build-frontend:
+#    name: Build And Push Frontend
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: RelizaHub Build And Submit Release metadata action
+#        uses: relizaio/rearm-docker-action@61b98443b2d503fb460e4a7409ad1819a271db3d # v1.4.0
+#        with:
+#          registry_username: ${{ secrets.DOCKER_LOGIN }}
+#          registry_password: ${{ secrets.DOCKER_TOKEN }}
+#          registry_host: registry.relizahub.com
+#          image_namespace: registry.relizahub.com/library
+#          image_name: rebom-frontend
+#          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
+#          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
+#          path: frontend
+#          enable_sbom: 'true'
+#  build-helm:
+#    name: Build And Push Helm Chart
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: RelizaHub Build And Submit Release metadata action
+#        uses: relizaio/reliza-helm-action@2.0
+#        with:
+#          registry_username: ${{ secrets.DOCKER_LOGIN }}
+#          registry_password: ${{ secrets.DOCKER_TOKEN }}
+#          registry_host: registry.relizahub.com/library
+#          helm_chart_name: rebom
+#          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
+#          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
+#          path: helm
