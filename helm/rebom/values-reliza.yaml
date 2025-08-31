@@ -1,4 +1,0 @@
-ingress:
-  minimalIngressEnabled: true
-  traefikEnabled: true
-  host: $RELIZA{PROPERTY.FQDN}

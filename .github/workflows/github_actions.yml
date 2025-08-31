@@ -57,17 +57,22 @@ jobs:
           enable_public_cosign_sigstore: 'true'
           enable_codeql: 'true'
           codeql_language: 'javascript'
-#  build-helm:
-#    name: Build And Push Helm Chart
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: RelizaHub Build And Submit Release metadata action
-#        uses: relizaio/reliza-helm-action@2.0
-#        with:
-#          registry_username: ${{ secrets.DOCKER_LOGIN }}
-#          registry_password: ${{ secrets.DOCKER_TOKEN }}
-#          registry_host: registry.relizahub.com/library
-#          helm_chart_name: rebom
-#          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
-#          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
-#          path: helm
+  build-helm:
+    permissions:
+      id-token: write
+    name: Build And Push Helm Chart
+    runs-on: ubuntu-latest
+    steps:
+      - name: ReARM Build And Submit Helm Chart Release metadata action
+        uses: relizaio/rearm-helm-action@f342cd287507008bc73251f40a53780fa683c8da # v1.1.1
+        with:
+          registry_username: ${{ secrets.DOCKER_LOGIN }}
+          registry_password: ${{ secrets.DOCKER_TOKEN }}
+          registry_host: registry.relizahub.com
+          image_namespace: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public
+          helm_chart_name: rebom
+          rearm_api_id: ${{ secrets.REARM_HELM_API_ID }}
+          rearm_api_key: ${{ secrets.REARM_HELM_API_KEY }}
+          rearm_api_url: https://sector.rearmhq.com
+          path: helm/rebom
+          enable_public_cosign_sigstore: 'true'

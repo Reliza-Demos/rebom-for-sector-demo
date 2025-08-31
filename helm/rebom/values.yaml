@@ -1,6 +1,6 @@
 enabled: true
 backend:
-  image: registry.relizahub.com/library/rebom-backend
+  image: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public/rebom-frontend
   replicaCount: 1
   regcred: none
   oci:
@@ -9,16 +9,16 @@ backend:
     registryHost: registry
     registryNamespace: namespace
 frontend:
-  image: registry.relizahub.com/library/rebom-frontend
+  image: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public/rebom-frontend
   replicaCount: 1
   regcred: none
 postgres:
-  image: postgres:16
+  image: postgres:17
   defaultSecret: true
   replicaCount: 1
-  storage: 5Gi
+  storage: 2Gi
 flyway:
-  image: flyway/flyway:8.4.4-alpine
+  image: redgate/flyway:11.8.2-alpine
 ingress:
   minimalIngressEnabled: true
   traefikEnabled: false

@@ -1,6 +1,0 @@
-postgresql:
-  storage: 2Gi
-ingress:
-  minimalIngressEnabled: false
-  traefikEnabled: true
-  host: rebomdemo.relizahub.com
