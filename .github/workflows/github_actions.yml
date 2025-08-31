@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ReARM Build And Submit Helm Chart Release metadata action
-        uses: relizaio/rearm-helm-action@9a0e1cc73a34de1529ac34ae6433322fd04f8c62 # v1.1.2
+        uses: relizaio/rearm-helm-action@206a0ba1e62888206140642c6f35760febaf1249 # v1.1.2
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
           registry_password: ${{ secrets.DOCKER_TOKEN }}
