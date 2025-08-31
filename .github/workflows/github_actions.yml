@@ -69,8 +69,7 @@ jobs:
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
           registry_password: ${{ secrets.DOCKER_TOKEN }}
-          registry_host: registry.relizahub.com
-          image_namespace: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public
+          registry_host: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public
           helm_chart_name: rebom
           rearm_api_id: ${{ secrets.REARM_HELM_API_ID }}
           rearm_api_key: ${{ secrets.REARM_HELM_API_KEY }}
