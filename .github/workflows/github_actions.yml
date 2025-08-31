@@ -17,7 +17,7 @@ jobs:
     name: Build And Push Backend
     runs-on: ubuntu-latest
     steps:
-      - name: RelizaHub Build And Submit Release metadata action
+      - name: ReARM Build And Submit Backend Release metadata action
         uses: relizaio/rearm-docker-action@61b98443b2d503fb460e4a7409ad1819a271db3d # v1.4.0
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
@@ -34,22 +34,29 @@ jobs:
           enable_public_cosign_sigstore: 'true'
           enable_codeql: 'true'
           codeql_language: 'javascript'
-#  build-frontend:
-#    name: Build And Push Frontend
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: RelizaHub Build And Submit Release metadata action
-#        uses: relizaio/rearm-docker-action@61b98443b2d503fb460e4a7409ad1819a271db3d # v1.4.0
-#        with:
-#          registry_username: ${{ secrets.DOCKER_LOGIN }}
-#          registry_password: ${{ secrets.DOCKER_TOKEN }}
-#          registry_host: registry.relizahub.com
-#          image_namespace: registry.relizahub.com/library
-#          image_name: rebom-frontend
-#          reliza_api_id: ${{ secrets.RELIZA_API_ID }}
-#          reliza_api_key: ${{ secrets.RELIZA_API_KEY }}
-#          path: frontend
-#          enable_sbom: 'true'
+  build-frontend:
+    permissions:
+      id-token: write
+    name: Build And Push Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: ReARM Build And Submit Frontend Release metadata action
+        uses: relizaio/rearm-docker-action@61b98443b2d503fb460e4a7409ad1819a271db3d # v1.4.0
+        with:
+          registry_username: ${{ secrets.DOCKER_LOGIN }}
+          registry_password: ${{ secrets.DOCKER_TOKEN }}
+          registry_host: registry.relizahub.com
+          image_namespace: registry.relizahub.com/291f1cbe-e608-4ffd-8e1e-9a7f78e3df18-public
+          image_name: rebom-frontend
+          rearm_api_id: ${{ secrets.REARM_FRONTEND_API_ID }}
+          rearm_api_key: ${{ secrets.REARM_FRONTEND_API_KEY }}
+          rearm_api_url: https://sector.rearmhq.com
+          path: frontend
+          enable_sbom: 'true'
+          source_code_sbom_type: 'npm'
+          enable_public_cosign_sigstore: 'true'
+          enable_codeql: 'true'
+          codeql_language: 'javascript'
 #  build-helm:
 #    name: Build And Push Helm Chart
 #    runs-on: ubuntu-latest
