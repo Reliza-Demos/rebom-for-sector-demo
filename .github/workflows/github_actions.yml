@@ -75,5 +75,5 @@ jobs:
           rearm_api_id: ${{ secrets.REARM_HELM_API_ID }}
           rearm_api_key: ${{ secrets.REARM_HELM_API_KEY }}
           rearm_api_url: https://sector.rearmhq.com
-          path: helm/rebom
+          path: helm
           enable_public_cosign_sigstore: 'true'
