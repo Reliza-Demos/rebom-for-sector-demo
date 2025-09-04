@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ReARM Build And Submit Backend Release metadata action
-        uses: relizaio/rearm-docker-action@c5ae0b25bc7f5371cc7a44601e7dbf8468f53e4b # v1.4.1
+        uses: relizaio/rearm-docker-action@18a9eb913e824fcaba099a1b8703384aa6d3c3ba # v1.4.2
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
           registry_password: ${{ secrets.DOCKER_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ReARM Build And Submit Frontend Release metadata action
-        uses: relizaio/rearm-docker-action@c5ae0b25bc7f5371cc7a44601e7dbf8468f53e4b # v1.4.1
+        uses: relizaio/rearm-docker-action@18a9eb913e824fcaba099a1b8703384aa6d3c3ba # v1.4.2
         with:
           registry_username: ${{ secrets.DOCKER_LOGIN }}
           registry_password: ${{ secrets.DOCKER_TOKEN }}
