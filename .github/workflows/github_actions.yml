@@ -4,6 +4,11 @@ on:
       - '*'
     tags-ignore:
       - '*'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
 
 name: Build Rebom images and Helm and submit metadata to ReARM
 
