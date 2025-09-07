@@ -5,7 +5,7 @@ RUN npm install
 COPY ./ .
 RUN npm run build
 
-FROM nginx:1.25.0-alpine3.17@sha256:2e776a66a3556f001aba13431b26e448fe8acba277bf93d2ab1a785571a46d90 AS artifact-stage
+FROM nginx:1.27.0-alpine3.19@sha256:sha256:208b70eefac13ee9be00e486f79c695b15cef861c680527171a27d253d834be9 AS artifact-stage
 ARG CI_ENV=noci
 ARG GIT_COMMIT=git_commit_undefined
 ARG GIT_BRANCH=git_branch_undefined
